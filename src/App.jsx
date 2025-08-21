@@ -9,9 +9,12 @@ import MyBookings from './pages/MyBookings'
 import Favourite from './pages/Favourite'
 
 const App = () => {
+
+const isAdminRoute = useLocation().pathname.startsWith('/admin');
+
   return (
     <>
-      <Navbar/>
+      {!isAdminRoute && <Navbar/>}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/movies' element={<Movies/>}/>
