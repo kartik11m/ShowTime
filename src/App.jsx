@@ -7,6 +7,8 @@ import Movies from './pages/Movies'
 import SeatLayout from './pages/SeatLayout'
 import MyBookings from './pages/MyBookings'
 import Favourite from './pages/Favourite'
+import {Toaster} from 'react-hot-toast'
+import Footer from './components/Footer'
 
 const App = () => {
 
@@ -14,6 +16,7 @@ const isAdminRoute = useLocation().pathname.startsWith('/admin');
 
   return (
     <>
+    <Toaster/>
       {!isAdminRoute && <Navbar/>}
       <Routes>
         <Route path='/' element={<Home/>}/>
@@ -23,6 +26,7 @@ const isAdminRoute = useLocation().pathname.startsWith('/admin');
         <Route path='/my-bookings' element={<MyBookings/>}/>
         <Route path='/favourite' element={<Favourite/>}/>
       </Routes>
+      {!isAdminRoute && <Footer/>}
     </>
   )
 }
