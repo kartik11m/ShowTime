@@ -4,6 +4,7 @@ import { dummyDateTimeData, dummyShowsData } from '../assets/assets';
 import BlurCircle from '../components/BlurCircle';
 import { HeartIcon, PlayCircleIcon, StarIcon } from 'lucide-react';
 import timeFormat from '../lib/timeFormat';
+import DateSelect from '../components/DateSelect';
 
 const MovieDetails = () => {
 
@@ -55,7 +56,7 @@ return show ? (
 
     <p className='text-lg font-medium mt-20'>Your Favourite Cast</p>
     <div className='overflow-x-auto no-scrollbar mt-8 pb-4'></div>
-    <div className='flex items-center gap-4 w-max px-4'>
+    <div className='flex flex-col md:flex-row items-center gap-4 w-max px-4'>
       {show.movie.casts.slice(0,12).map((cast,index) =>(
         <div key={index} className='flex flex-col items-center text-center'>
           <img src={cast.profile_path} alt="" 
@@ -64,6 +65,8 @@ return show ? (
         </div>
       ))}
     </div>
+
+    <DateSelect dateTime={show.dateTime} id={id}/>
   </div>
 ): <div>Loading...</div>
 
