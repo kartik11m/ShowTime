@@ -3,6 +3,7 @@ import { dummyBookingData } from '../assets/assets';
 import Loading from '../components/Loading';
 import BlurCircle from '../components/BlurCircle';
 import timeFormat from '../lib/timeFormat';
+import { dateFormat } from '../lib/dateFormat';
 
 const MyBookings = () => {
 
@@ -37,7 +38,7 @@ const MyBookings = () => {
             <div className="flex flex-col p-4">
               <p className='text-lg font-semibold'>{item.show.movie.title}</p>
               <p className="text-gray-400 text-sm">{timeFormat(item.show.movie.runtime)}</p>
-              <p className="text-gray-400 text-sm mt-auto">{item.show.showDateTime}</p>
+              <p className="text-gray-400 text-sm mt-auto">{dateFormat(item.show.showDateTime)}</p>
             </div>
           </div>
         </div>
