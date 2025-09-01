@@ -20,10 +20,10 @@ const ListShows = () => {
                 headers: {Authorization: `Bearer ${await getToken()}`}
             });
             setShows(data.shows)
-            setLoading(false);
         }catch(error){
             console.error(error);
         }
+        setLoading(false);
     }
 
     useEffect(()=>{
