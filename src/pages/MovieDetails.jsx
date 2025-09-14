@@ -8,6 +8,7 @@ import DateSelect from '../components/DateSelect';
 import MovieCard from '../components/MovieCard';
 import Loading from '../components/Loading';
 import { useAppContext } from '../context/AppContext';
+import {toast} from 'react-hot-toast'
 
 const MovieDetails = () => {
 
@@ -25,7 +26,25 @@ const getShow = async ()=>{
       setShow(data);
     }
   } catch (error) {
-    console.error(error);
+    console.log(error);
+  }
+}
+
+const handleFavorite = async ()=>{
+  try{
+    if(!user){
+      return toast.error("Please login to proceed");
+    }
+      const {data} = await axios.post('/api/user/update-favorite', {movieId: id},
+        {headers: {Authorization: `Bearer ${await getToken()}`}}
+      );
+
+      if(data.success){
+        await fetchFavoriteMovies();
+        toast.success(data.message);
+      }
+  }catch(error){
+    console.log(error);
   }
 }
 
@@ -56,9 +75,9 @@ return show ? (
           cursor-pointer active:scale-95'> 
           <PlayCircleIcon className='w-5 h-5'/>  Watch Trailer</button>
           <a href="#dateSelect">Buy Tickets</a>
-          <button className='bg-gray-700 p-2.5 rounded-full transition 
+          <button onClick={handleFavorite} className='bg-gray-700 p-2.5 rounded-full transition 
           cursor-pointer active:scale-95'>
-            <HeartIcon className={`w-5 h-5`}/>
+            <HeartIcon className={`w-5 h-5 ${favoriteMovies.find(movie => movie._id === id) ? 'fill-primary text-primary' : ""}`}/>
           </button>
         </div>
       </div>
